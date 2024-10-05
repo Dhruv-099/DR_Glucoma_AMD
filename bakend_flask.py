@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request,render_template
 '''
 import boto3
 def upload_file():
@@ -17,9 +17,10 @@ def upload_file():
 app = Flask(__name__)
 @app.route("/")
 
-def re():
-    return render_template('home.html')
 
-if __name__=='main':
+def re():
+    return render_template('home.html',Doctors=Docs)
+
+if __name__=='__main__':
     app.run(host='0.0.0.0', debug = True)
 
