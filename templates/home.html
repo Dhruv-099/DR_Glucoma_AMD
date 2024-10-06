@@ -1,37 +1,117 @@
 <!DOCTYPE html>
-<html>
-    
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content= "IE=edge">
-        <title>Grp 25 Capstone</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<html lang="en">
 
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>    
-        
-            <div class="header" id="myHeader">
-                <h2>Capstone Project Group 25</h2>
-            </div>
-            <div class="content" id ="mycontent">
-                <h2>About Us</h2>
-                <p class="lead">Our group is working on a project to help doctors diagnose Diabetic Retinopathy, Glaucoma, and AMD. We are using machine learning to help doctors diagnose these diseases.</p>
-                <h3>Members</h3>
-                <ul>
-                    <li>Dhruv Bobal<img class="img-fluid" src="static/Dhruv Bobal.png" alt="Dhruv Bobal"></li>
-                    <li>Muskan Garg<img src="" alt="Muskan Garg"></li>
-                    <li>Vaibhav Kapoor<img src="" alt="Vaibhav Kapoor"></li>
-                    <li>Awal Gandhi<img src="" alt="Awal Gandhi"></li>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Grp 25 Capstone</title>
+    <meta name="description" content="Capstone project by Group 25 on diagnosing retinal diseases using machine learning.">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Grp 25 Capstone</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#myHeader">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#mycontent">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#members">Members</a>
+                    </li>
                 </ul>
             </div>
-            
-            <footer>
-                <p>Copyright © 2024 Dhruv Bobal. All rights reserved.</p>
-                <p>Contact: <a href="mailto:dbobal_be21@thapar.edu">dbobal_be21@thapar.edu</a></p>
-            </footer>
-        <script src="" async defer></script>
-    </body>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="header" id="myHeader">
+        <div class="container text-center">
+            <h1 class="display-4">Capstone Project Group 25</h1>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section class="content py-5" id="mycontent">
+        <div class="container">
+            <h2 class="text-center">About Us</h2>
+            <p class="lead text-center">Our group is working on a project to help doctors diagnose Diabetic Retinopathy, Glaucoma, and AMD using machine learning algorithms.</p>
+        </div>
+    </section>
+
+    <!-- Disease Information Section -->
+    <section class="diseases py-5" id="diseases">
+        <div class="container">
+            <h2 class="text-center mb-5">Eye Diseases We Focus On</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="disease-card p-4 shadow-sm">
+                        <h4 class="text-center">Age-Related Macular Degeneration (AMD)</h4>
+                        <p>Age-Related Macular Degeneration (AMD) affects the macula, the central part of the retina responsible for sharp vision. It can lead to blurred or distorted central vision, with two types: dry and wet AMD.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="disease-card p-4 shadow-sm">
+                        <h4 class="text-center">Glaucoma</h4>
+                        <p>Glaucoma is a group of eye conditions that damage the optic nerve, often due to high eye pressure. It can cause gradual vision loss, sometimes without noticeable symptoms, which makes early detection crucial.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="disease-card p-4 shadow-sm">
+                        <h4 class="text-center">Diabetic Retinopathy</h4>
+                        <p>Diabetic Retinopathy is caused by damage to the blood vessels in the retina due to diabetes. It can lead to vision impairment or blindness if not managed properly, but early detection can prevent its progression.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section class="team py-5 bg-light" id="members">
+        <div class="container">
+            <h3 class="text-center mb-4">Members</h3>
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <img class="img-fluid rounded-circle mb-3" src="static/Dhruv Bobal.png" alt="Dhruv Bobal" width="150">
+                    <h4>Dhruv Bobal</h4>
+                </div>
+                <div class="col-md-3 text-center">
+                    <img class="img-fluid rounded-circle mb-3" src="static/Muskan Garg.png" alt="Muskan Garg" width="150">
+                    <h4>Muskan Garg</h4>
+                </div>
+                <div class="col-md-3 text-center">
+                    <img class="img-fluid rounded-circle mb-3" src="static/Vaibhav Kapoor.png" alt="Vaibhav Kapoor" width="150">
+                    <h4>Vaibhav Kapoor</h4>
+                </div>
+                <div class="col-md-3 text-center">
+                    <img class="img-fluid rounded-circle mb-3" src="static/Awal Gandhi.png" alt="Awal Gandhi" width="150">
+                    <h4>Awal Gandhi</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>Copyright © 2024 Dhruv Bobal. All rights reserved.</p>
+            <p>Contact: <a href="mailto:dbobal_be21@thapar.edu" class="text-white">dbobal_be21@thapar.edu</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
