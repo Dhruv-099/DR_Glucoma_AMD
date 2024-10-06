@@ -1,0 +1,16 @@
+Flask
+Gunicorn
+numpy
+pandas
+joblib
+scikit-learn
+matplotlib
+seaborn
+random
+tensorflow
+pathlib
+warnings
+collections
+PIL
+glob
+os
