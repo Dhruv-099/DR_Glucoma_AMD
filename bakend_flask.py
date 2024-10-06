@@ -12,6 +12,20 @@ def upload_file():
     s3.upload_fileobj(file, 'your-bucket-name', file.filename)
     
     return "File uploaded successfully"
+    numpy
+    pandas
+    joblib
+    scikit-learn
+    matplotlib
+    seaborn
+    random
+    tensorflow
+    pathlib
+    warnings    
+    collections
+    PIL
+    glob
+    os
 '''
 
 app = Flask(__name__)
