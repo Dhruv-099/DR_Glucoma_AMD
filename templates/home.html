@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#myHeader">Home</a>
+                        <a class="nav-link active" aria-current="page" href="#myHeader">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#mycontent">About Us</a>
@@ -31,10 +31,14 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#members">Members</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Live Demo</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    
 
     <!-- Header Section -->
     <header class="header" id="myHeader">
@@ -47,61 +51,57 @@
     <section class="content py-5" id="mycontent">
         <div class="container">
             <h2 class="text-center">About Us</h2>
-            <p class="lead text-center">Our group is working on a project to help doctors diagnose Diabetic Retinopathy, Glaucoma, and AMD using machine learning algorithms.</p>
+            <p class="lead text-center">
+                We are a group of final-year Electronics and Communication Engineering (ECE) students passionate about leveraging technology for the betterment of healthcare. With an aim to address the increasing prevalence of eye diseases, we have developed an advanced model capable of detecting glaucoma, age-related macular degeneration (AMD), and diabetic retinopathy (DR). Our project combines cutting-edge machine learning techniques with medical insights to provide early and accurate detection of these conditions, enabling timely interventions and improved patient outcomes.<br>Our team brings together a diverse set of skills, from data analysis and software development to electronics design, making this project a comprehensive solution to modern healthcare challenges. We believe that innovation in healthcare technology is essential for improving quality of life, and we are dedicated to making a difference through our work.
+            </p>
         </div>
     </section>
 
     <!-- Disease Information Section -->
-    <section class="diseases py-5" id="diseases">
-        <div class="container">
-            <h2 class="text-center mb-5">Eye Diseases We Focus On</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="disease-card p-4 shadow-sm">
-                        <h4 class="text-center">Age-Related Macular Degeneration (AMD)</h4>
-                        <p>Age-Related Macular Degeneration (AMD) affects the macula, the central part of the retina responsible for sharp vision. It can lead to blurred or distorted central vision, with two types: dry and wet AMD.</p>
+    <div class="container">
+        <h2 class="text-center mb-5">Eye Diseases We Focus On</h2>
+        <div class="row">
+            {% for disease in diseases %}
+                <div class="col-md-4"> <!-- Change this line -->
+                    <div class="disease-card p-4 shadow-sm mb-4"> <!-- Add mb-4 for spacing -->
+                        <h4 class="text-center">{{ disease.name }}</h4>
+                        <p>{{ disease.description }}</p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="disease-card p-4 shadow-sm">
-                        <h4 class="text-center">Glaucoma</h4>
-                        <p>Glaucoma is a group of eye conditions that damage the optic nerve, often due to high eye pressure. It can cause gradual vision loss, sometimes without noticeable symptoms, which makes early detection crucial.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="disease-card p-4 shadow-sm">
-                        <h4 class="text-center">Diabetic Retinopathy</h4>
-                        <p>Diabetic Retinopathy is caused by damage to the blood vessels in the retina due to diabetes. It can lead to vision impairment or blindness if not managed properly, but early detection can prevent its progression.</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-    </section>
+    </div>
+    
 
     <!-- Members Section -->
     <section class="team py-5 bg-light" id="members">
         <div class="container">
             <h3 class="text-center mb-4">Members</h3>
             <div class="row">
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 text-center">
                     <img class="img-fluid rounded-circle mb-3" src="static/Dhruv Bobal.png" alt="Dhruv Bobal" width="150">
                     <h4>Dhruv Bobal</h4>
                 </div>
-                <div class="col-md-3 text-center">
-                    <img class="img-fluid rounded-circle mb-3" src="static/Muskan Garg.png" alt="Muskan Garg" width="150">
+                <div class="col-md-2 text-center">
+                    <img class="img-fluid rounded-circle mb-3" src="static/Muskan.jpg" alt="Muskan Garg" width="150">
                     <h4>Muskan Garg</h4>
                 </div>
-                <div class="col-md-3 text-center">
+                <div class="col-md-2 text-center">
                     <img class="img-fluid rounded-circle mb-3" src="static/Vaibhav Kapoor.png" alt="Vaibhav Kapoor" width="150">
                     <h4>Vaibhav Kapoor</h4>
                 </div>
-                <div class="col-md-3 text-center">
-                    <img class="img-fluid rounded-circle mb-3" src="static/Awal Gandhi.png" alt="Awal Gandhi" width="150">
+                <div class="col-md-2 text-center">
+                    <img class="img-fluid rounded-circle mb-3" src="static/Awal.jpg" alt="Awal Gandhi" width="150">
                     <h4>Awal Gandhi</h4>
+                </div>
+                <div class="col-md-2 text-center">
+                    <img class="img-fluid rounded-circle mb-3" src="static/Shreya.jpg" alt="Shreya Bhojake" width="150">
+                    <h4>Shreya Bhojake</h4>
                 </div>
             </div>
         </div>
     </section>
+    
 
     <!-- Footer Section -->
     <footer class="bg-dark text-white py-4">
@@ -112,6 +112,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 
 </html>

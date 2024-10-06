@@ -31,6 +31,10 @@ html {
 .navbar .nav-link:hover {
     color: #f0db4f;
 }
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
+}
+
 
 /* About Section */
 .content h2 {
@@ -68,7 +72,7 @@ html {
 }
 
 .team img:hover {
-    transform: scale(1.1);
+    transform: scale(0.9);
 }
 
 /* Footer */
@@ -84,4 +88,32 @@ footer {
     .header {
         height: 50vh;
     }
+}
+/* Login Section Styling */
+.login-section {
+    background-color: #f0f0f0;
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-form h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.login-form .form-control {
+    font-size: 1rem;
+    padding: 0.75rem;
+}
+
+.login-form .btn {
+    font-size: 1.1rem;
+}
+
+.login-form p {
+    font-size: 0.9rem;
 }
