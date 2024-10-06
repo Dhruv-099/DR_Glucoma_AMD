@@ -1,0 +1,119 @@
+/* Smooth scroll for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('static/header-bg.jpg') no-repeat center center/cover;
+    height: 100vh;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Navbar */
+.navbar {
+    transition: background-color 0.5s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.navbar .nav-link {
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar .nav-link:hover {
+    color: #f0db4f;
+}
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
+}
+
+
+/* About Section */
+.content h2 {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+/* Diseases Section */
+.diseases {
+    background-color: #f9f9f9;
+}
+
+.disease-card {
+    background-color: white;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.disease-card:hover {
+    transform: translateY(-10px);
+}
+
+.disease-card h4 {
+    margin-bottom: 1rem;
+}
+
+.disease-card p {
+    font-size: 0.95rem;
+    text-align: justify;
+}
+
+/* Members Section */
+.team img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.team img:hover {
+    transform: scale(0.9);
+}
+
+/* Footer */
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .header {
+        height: 50vh;
+    }
+}
+/* Login Section Styling */
+.login-section {
+    background-color: #f0f0f0;
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+}
+
+.login-form h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.login-form .form-control {
+    font-size: 1rem;
+    padding: 0.75rem;
+}
+
+.login-form .btn {
+    font-size: 1.1rem;
+}
+
+.login-form p {
+    font-size: 0.9rem;
+}

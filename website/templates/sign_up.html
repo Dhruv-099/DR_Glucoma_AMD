@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<!-- Sign Up Form Section -->
+<section class="signup-section d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="signup-form bg-light p-5 rounded shadow-lg">
+        <h2 class="text-center mb-4">Doctor/Nurse Sign Up</h2>
+        <form action="{{ url_for('project_dashboard') }}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required placeholder="Enter your username">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required placeholder="Confirm your password">
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </div>
+            <p class="text-center mt-3">Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
+
+        </form>
+    </div>
+
+
+</section>
+{% endblock %}

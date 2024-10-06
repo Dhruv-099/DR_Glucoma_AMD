@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<!-- Login Form Section -->
+<section class="login-section d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="login-form bg-light p-5 rounded shadow-lg">
+        <h2 class="text-center mb-4">Doctor/Nurse Login</h2>
+        <form action="{{ url_for('project_dashboard') }}" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" required placeholder="Enter your username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
+            <p class="text-center mt-3"><a href="#">Forgot Password?</a></p>
+        </form>
+    </div>
+</section>
+{% endblock %}
