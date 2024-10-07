@@ -7,7 +7,7 @@
 <section class="signup-section d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="signup-form bg-light p-5 rounded shadow-lg">
         <h2 class="text-center mb-4">Doctor/Nurse Sign Up</h2>
-        <form action="{{ url_for('project_dashboard') }}" method="post">
+        <form action="{{ url_for('views.project_dashboard') }}" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required placeholder="Enter your username">
@@ -27,6 +27,15 @@
             <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
             </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
             <p class="text-center mt-3">Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
 
         </form>

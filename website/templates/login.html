@@ -7,7 +7,7 @@
 <section class="login-section d-flex justify-content-center align-items-center" style="height: 100vh;">
     <div class="login-form bg-light p-5 rounded shadow-lg">
         <h2 class="text-center mb-4">Doctor/Nurse Login</h2>
-        <form action="{{ url_for('project_dashboard') }}" method="post">
+        <form action="{{ url_for('views.project_dashboard') }}" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" class="form-control" id="username" name="username" required placeholder="Enter your username">

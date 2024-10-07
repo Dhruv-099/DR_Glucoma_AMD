@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template
+from flask import Blueprint,render_template,request
 from flask_login import current_user
 views= Blueprint('views',__name__)
 
@@ -21,3 +21,10 @@ def home():
     ]
     return render_template('home.html',user=current_user,diseases=diseases)
 
+@views.route('/project-dashboard', methods=['GET', 'POST'])
+def project_dashboard():
+    if request.method == 'POST':
+        form_data = request.form.to_dict()
+    else:
+        form_data = {}
+    return render_template('project-dashboard.html', data=form_data)
