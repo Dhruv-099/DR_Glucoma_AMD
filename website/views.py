@@ -1,7 +1,11 @@
-from flask import Blueprint,render_template,request
+import os
+from flask import Blueprint,render_template,request,redirect,url_for,flash
 from flask_login import current_user
-views= Blueprint('views',__name__)
+from .models import db,Patient, Patient_history
+from werkzeug.utils import secure_filename
+from flask import current_app
 
+views= Blueprint('views',__name__)
 
 @views.route('/')
 def home():
@@ -21,10 +25,45 @@ def home():
     ]
     return render_template('home.html',user=current_user,diseases=diseases)
 
+#UPLOAD_FOLDER = 'website/static/Patient_uploads'
+allowed_extensions = {'raw', 'png', 'jpg', 'jpeg'}
+
+def allowed_fn(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
+
 @views.route('/project-dashboard', methods=['GET', 'POST'])
 def project_dashboard():
     if request.method == 'POST':
-        form_data = request.form.to_dict()
-    else:
-        form_data = {}
-    return render_template('project-dashboard.html', data=form_data)
+        name = request.form.get('name')
+        age = request.form.get('age')
+        gender = request.form.get('gender')
+        phone_number = request.form.get('phone_number')
+        doctor_id = request.form.get('doctor_id')
+        file = request.files.get('photo')
+
+        if not name or not age or not gender or not phone_number or not doctor_id or not file:
+            flash('All fields are required', 'error')
+            return redirect(url_for('views.project_dashboard'))
+
+        if file and allowed_fn(file.filename):
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)  # Use current_app to access config
+            file.save(file_path)
+
+            # Create the new patient record after successfully saving the file
+            new_patient = Patient(
+                name=name,
+                age=age,
+                gender=gender,
+                phone_number=phone_number,
+                doctor_id=doctor_id
+            )
+            db.session.add(new_patient)
+            db.session.commit()
+            flash('Patient data submitted successfully', 'success')
+            return redirect(url_for('views.project_dashboard'))
+        else:
+            flash('Invalid file type. Only images are allowed.', 'error')
+            return redirect(url_for('views.project_dashboard'))
+
+    return render_template('project-dashboard.html')

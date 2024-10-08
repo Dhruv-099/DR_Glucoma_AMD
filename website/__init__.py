@@ -17,10 +17,10 @@ def load_user(id):
         return doctor
     return Patient.query.get(int(id))
 
-# Function to create the database if it doesn't exist
+
 def create_db(app):
     if not path.exists('website/' + DB_NAME):
-        with app.app_context():  # Ensure app context for db.create_all
+        with app.app_context():  
             db.create_all()  
         app.logger.info('Created Database!')
     else:
@@ -28,12 +28,12 @@ def create_db(app):
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'obfdbgbkpwfduvbfd'  # Secret key for session encryption
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'  # Path to SQLite DB
+    app.config['SECRET_KEY'] = 'obfdbgbkpwfduvbfd'  
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'  
+    app.config['UPLOAD_FOLDER'] = 'website/static/Patient_uploads'
 
-    db.init_app(app)  # Initialize the database with the app
+    db.init_app(app)  
     
-    # Setup logging
     logging.basicConfig(level=logging.DEBUG)
     app.logger.addHandler(logging.StreamHandler())
     app.logger.setLevel(logging.DEBUG)

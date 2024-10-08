@@ -23,10 +23,10 @@
         </button>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-home" href="{{ url_for('views.home') }}">Home</a>
+                </li>
                 {% if current_user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" id="nav-home" href="{{ url_for('views.home') }}">Home</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" id="nav-logout" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
@@ -43,7 +43,7 @@
                 {% endif %}
             </ul>
         </div>
-    </nav>
+    </nav>    
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}

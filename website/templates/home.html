@@ -15,25 +15,28 @@
     <div class="container">
         <h2 class="text-center">About Us</h2>
         <p class="lead text-center">
-            We are a group of final-year Electronics and Communication Engineering (ECE) students passionate about leveraging technology for the betterment of healthcare. With an aim to address the increasing prevalence of eye diseases, we have developed an advanced model capable of detecting glaucoma, age-related macular degeneration (AMD), and diabetic retinopathy (DR). Our project combines cutting-edge machine learning techniques with medical insights to provide early and accurate detection of these conditions, enabling timely interventions and improved patient outcomes.<br>Our team brings together a diverse set of skills, from data analysis and software development to electronics design, making this project a comprehensive solution to modern healthcare challenges. We believe that innovation in healthcare technology is essential for improving quality of life, and we are dedicated to making a difference through our work.
+            We are a group of final-year Electronics and Communication Engineering (ECE) students passionate about leveraging technology for the betterment of healthcare. With an aim to address the increasing prevalence of eye diseases, we have developed an advanced model capable of detecting glaucoma, age-related macular degeneration (AMD), and diabetic retinopathy (DR). Our project combines cutting-edge machine learning techniques with medical insights to provide early and accurate detection of these conditions, enabling timely interventions and improved patient outcomes.<br>
+            Our team brings together a diverse set of skills, from data analysis and software development to electronics design, making this project a comprehensive solution to modern healthcare challenges. We believe that innovation in healthcare technology is essential for improving quality of life, and we are dedicated to making a difference through our work.
         </p>
     </div>
 </section>
 
 <!-- Disease Information Section -->
-<div class="container">
-    <h2 class="text-center mb-5">Eye Diseases We Focus On</h2>
-    <div class="row">
-        {% for disease in diseases %}
-            <div class="col-md-4">
-                <div class="disease-card p-4 shadow-sm mb-4">
-                    <h4 class="text-center">{{ disease.name }}</h4>
-                    <p>{{ disease.description }}</p>
+<section class="diseases py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Eye Diseases We Focus On</h2>
+        <div class="row">
+            {% for disease in diseases %}
+                <div class="col-md-4">
+                    <div class="disease-card p-4 shadow-sm mb-4">
+                        <h4 class="text-center">{{ disease.name }}</h4>
+                        <p>{{ disease.description }}</p>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
+</section>
 
 <!-- Members Section -->
 <section class="team py-5 bg-light" id="members">
@@ -45,19 +48,19 @@
                 <h4>Dhruv Bobal</h4>
             </div>
             <div class="col-md-2 text-center">
-                <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='Muskan.jpg') }}"  alt="Muskan Garg" width="150">
+                <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='Muskan.jpg') }}" alt="Muskan Garg" width="150">
                 <h4>Muskan Garg</h4>
             </div>
             <div class="col-md-2 text-center">
-                <img class="img-fluid rounded-circle mb-3" src="{{url_for('static',filename='Vaibhav.jpg')}}" alt="Vaibhav Kapoor" width="150">
+                <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='Vaibhav.jpg') }}" alt="Vaibhav Kapoor" width="150">
                 <h4>Vaibhav Kapoor</h4>
             </div>
             <div class="col-md-2 text-center">
-                <img class="img-fluid rounded-circle mb-3" src="{{url_for('static',filename='Awal.jpg')}}"  alt="Awal Gandhi" width="150">
+                <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='Awal.jpg') }}" alt="Awal Gandhi" width="150">
                 <h4>Awal Gandhi</h4>
             </div>
             <div class="col-md-2 text-center">
-                <img class="img-fluid rounded-circle mb-3" src="{{url_for('static',filename='Shreya.jpg')}}" alt="Shreya Bhojake" width="150">
+                <img class="img-fluid rounded-circle mb-3" src="{{ url_for('static', filename='Shreya.jpg') }}" alt="Shreya Bhojake" width="150">
                 <h4>Shreya Bhojake</h4>
             </div>
         </div>

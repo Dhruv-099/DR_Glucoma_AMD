@@ -18,12 +18,13 @@ class Patient(db.Model):
     phone_number = db.Column(db.String(20))  
     doctor_id = db.Column(db.Integer, db.ForeignKey('doctor.id'))  
     date = db.Column(db.DateTime(timezone=True), default=func.now())
-'''
-update it so that the after diagnosis each patient is assigned disease
-class Disease(db.Model):
+    photo=db.Column(db.String(600))
+
+class Patient_history(db.Model):
     id= db.Column(db.Integer,primary_key=True)
+    patient_id=db.Column(db.String,db.ForeignKey('patient.id'))
     name= db.Column(db.String(150))
     description= db.Column(db.String(150))
-    patient=db.Column(db.String,db.ForeignKey('patient.id'))
     date=db.Column(db.DateTime(timezone=True),default=func.now)
-'''
+    photo=db.Column(db.String(600))
+    patient=db.relationship('Patient',backref='history')
