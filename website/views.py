@@ -67,3 +67,10 @@ def project_dashboard():
             return redirect(url_for('views.project_dashboard'))
 
     return render_template('project-dashboard.html')
+
+@views.route('/patient/<int:patient_id>/history', methods=['GET'])
+def patient_history(patient_id):
+    # Query the patient by ID
+    patient = Patient.query.get_or_404(patient_id)
+    history = Patient_history.query.filter_by(patient_id=patient_id).all()
+    return render_template('patient-history.html', patient=patient, history=history)
