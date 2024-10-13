@@ -3,9 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager, current_user
 import logging
+from flask_migrate import Migrate
 
 # Initialize extensions
 db = SQLAlchemy()
+migrate= Migrate()
 DB_NAME = 'database.db'
 login_manager = LoginManager()
 
@@ -31,6 +33,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'obfdbgbkpwfduvbfd'  
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'  
     app.config['UPLOAD_FOLDER'] = 'website/static/Patient_uploads'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)  
     
@@ -51,6 +54,7 @@ def create_app():
     
     # Create the database
     create_db(app)
+    migrate.init_app(app, db)
 
     # Setup login manager
     login_manager.login_view = 'auth.login'  # Where to redirect if the user is not logged in
