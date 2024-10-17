@@ -1,12 +1,13 @@
 import os
-from flask import Blueprint,render_template,request,redirect,url_for,flash
+from flask import Blueprint,render_template,request,redirect,url_for,flash,current_app
 from flask_login import current_user
 from .models import db,Patient, Patient_history
 from werkzeug.utils import secure_filename
-from flask import current_app
+import tensorflow as tf
+from tf.keras.utils import load_img, img_to_array
 
 views= Blueprint('views',__name__)
-
+model = tf.keras.models.load_model('.h5')
 @views.route('/')
 def home():
     diseases = [
@@ -31,6 +32,14 @@ allowed_extensions = {'raw', 'png', 'jpg', 'jpeg'}
 def allowed_fn(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
+def preprocess_image(image_path):
+    img = load_img(image_path, target_size=(224, 224))  
+    img_array = img_to_array(img)
+    img_array = img_array / 255.0  
+    img_array = img_array.reshape(1, 224, 224, 3)  
+    return img_array
+
+
 @views.route('/project-dashboard', methods=['GET', 'POST'])
 def project_dashboard():
     if request.method == 'POST':
@@ -41,16 +50,21 @@ def project_dashboard():
         doctor_id = request.form.get('doctor_id')
         file = request.files.get('photo')
 
-        if not name or not age or not gender or not phone_number or not doctor_id or not file:
+        if not all([name, age, gender, phone_number, doctor_id]) or not file:
             flash('All fields are required', 'error')
             return redirect(url_for('views.project_dashboard'))
 
         if file and allowed_fn(file.filename):
             filename = secure_filename(file.filename)
-            file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)  # Use current_app to access config
+            file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)  
             file.save(file_path)
+            img_array = preprocess_image(file_path)
+            prediction = model.predict(img_array)
+            disease_class = prediction.argmax()
+            class_names = ['Diabetic Retinopathy', 'Glaucoma', 'AMD']
 
-            # Create the new patient record after successfully saving the file
+            prediction_result = class_names[disease_class]
+            flash(f'Prediction: {prediction_result}', 'success')
             new_patient = Patient(
                 name=name,
                 age=age,
@@ -70,7 +84,6 @@ def project_dashboard():
 
 @views.route('/patient/<int:patient_id>/history', methods=['GET'])
 def patient_history(patient_id):
-    # Query the patient by ID
     patient = Patient.query.get_or_404(patient_id)
     history = Patient_history.query.filter_by(patient_id=patient_id).all()
     return render_template('patient-history.html', patient=patient, history=history)

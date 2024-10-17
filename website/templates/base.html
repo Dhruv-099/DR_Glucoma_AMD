@@ -26,12 +26,18 @@
                 <li class="nav-item">
                     <a class="nav-link" id="nav-home" href="{{ url_for('views.home') }}">Home</a>
                 </li>
+    
                 {% if current_user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" id="nav-logout" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="nav-live-demo" href="{{ url_for('views.project_dashboard') }}">Live Demo</a>
+                        <a class="nav-link" id="nav-dashboard" href="{{ url_for('views.project_dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            {{ current_user.firstName[0] | upper }}  <!-- Display the first letter of the user’s name -->
+                        </a>
                     </li>
                 {% else %}
                     <li class="nav-item">
