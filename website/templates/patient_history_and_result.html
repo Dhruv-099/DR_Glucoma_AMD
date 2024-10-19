@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Patient History{% endblock %}
+{% block title %}Patient History and Prediction Result{% endblock %}
 
 {% block content %}
 <div class="mt-5">
-    <h1>History for {{ patient.name }}</h1>
+    <h1>History and Prediction for {{ patient.name }}</h1>
     
     <h3>Patient Information</h3>
     <p><strong>Age:</strong> {{ patient.age }}</p>
@@ -34,5 +34,17 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <h3>Prediction Result</h3>
+    <p>Your prediction is: <strong>{{ prediction }}</strong></p>
+    <p><strong>Details:</strong></p>
+    <ul>
+        <li>Name: {{ patient.name }}</li>
+        <li>Age: {{ patient.age }}</li>
+        <li>Gender: {{ patient.gender }}</li>
+        <li>Image: <img src="{{ image_url }}" alt="Uploaded Image" class="img-thumbnail" width="200"></li>
+    </ul>
+
+    <a href="{{ url_for('views.project_dashboard') }}" class="btn btn-primary">Go back</a>
 </div>
 {% endblock %}

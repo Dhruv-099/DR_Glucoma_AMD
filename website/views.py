@@ -9,7 +9,7 @@ from tensorflow.keras.models import load_model
 
 
 views= Blueprint('views',__name__)
-model = load_model(r'best_model_transfer.h5')
+model = load_model(r'D:\OneDrive\Documents\GitHub\DR_Glucoma_AMD\best_model_transfer.h5')
 @views.route('/')
 def home():
     diseases = [
@@ -76,6 +76,8 @@ def project_dashboard():
             )
             db.session.add(new_patient)
             db.session.commit()
+            # Get the patient's history after adding
+            history = Patient_history.query.filter_by(patient_id=new_patient.id).all()            
             flash('Patient data submitted successfully', 'success')
             return redirect(url_for('views.project_dashboard'))
         else:
@@ -88,4 +90,4 @@ def project_dashboard():
 def patient_history(patient_id):
     patient = Patient.query.get_or_404(patient_id)
     history = Patient_history.query.filter_by(patient_id=patient_id).all()
-    return render_template('patient-history.html', patient=patient, history=history)
+    return render_template('patient_history_and_results.html', patient=patient, history=history)

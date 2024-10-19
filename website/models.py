@@ -25,6 +25,6 @@ class Patient_history(db.Model):
     patient_id=db.Column(db.String,db.ForeignKey('patient.id'))
     name= db.Column(db.String(150))
     description= db.Column(db.String(150))
-    date=db.Column(db.DateTime(timezone=True),default=func.now)
+    date=db.Column(db.DateTime(timezone=True),default=func.now())
     photo=db.Column(db.String(600))
     patient=db.relationship('Patient',backref='history')
