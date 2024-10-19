@@ -4,10 +4,12 @@ from flask_login import current_user
 from .models import db,Patient, Patient_history
 from werkzeug.utils import secure_filename
 import tensorflow as tf
-from tf.keras.utils import load_img, img_to_array
+from tensorflow.keras.utils import load_img, img_to_array
+from tensorflow.keras.models import load_model
+
 
 views= Blueprint('views',__name__)
-model = tf.keras.models.load_model('.h5')
+model = load_model(r'best_model_transfer.h5')
 @views.route('/')
 def home():
     diseases = [
