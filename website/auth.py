@@ -58,7 +58,7 @@ def sign_up():
             flash('Password must be at least 7 characters', category='error')
         else:
             
-            new_doc = Doctor(email=email, firstName=firstName, password=generate_password_hash(password1, method='sha256'))
+            new_doc = Doctor(email=email, firstName=firstName, password=generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_doc)
             db.session.commit()
             flash('Account created successfully!', category='success')
