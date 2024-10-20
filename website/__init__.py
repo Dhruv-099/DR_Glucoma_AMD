@@ -10,16 +10,6 @@ db = SQLAlchemy()
 migrate= Migrate()
 DB_NAME = 'database.db'
 login_manager = LoginManager()
-
-@login_manager.user_loader
-def load_user(id):
-    from .models import Doctor, Patient
-    doctor = Doctor.query.get(int(id))
-    if doctor:
-        return doctor
-    return Patient.query.get(int(id))
-
-
 def create_db(app):
     if not path.exists('website/' + DB_NAME):
         with app.app_context():  
@@ -57,9 +47,15 @@ def create_app():
     migrate.init_app(app, db)
 
     # Setup login manager
-    login_manager.login_view = 'auth.login'  # Where to redirect if the user is not logged in
     login_manager.init_app(app)
-
+    login_manager.login_view = 'auth.login'  # Where to redirect if the user is not logged in
+    @login_manager.user_loader
+    def load_user(id):
+        from .models import Doctor, Patient
+        doctor = Doctor.query.get(int(id))
+        if doctor:
+            return doctor
+        return Patient.query.get(int(id))
     @app.context_processor
     def inject_user():
         return dict(current_user=current_user)  # Inject current_user into all templates

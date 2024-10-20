@@ -66,16 +66,16 @@ def sign_up():
             return redirect(url_for('views.home'))  
 
     return render_template('sign_up.html', user=current_user)
-
-#@auth.route('/forgot-password', methods=['GET', 'POST'])
-#def forgot_password():
-    #if request.method == 'POST':
-        #email = request.form.get('email')
-        #if email exists in database:
-        #    send_reset_email(email)
-        #    flash('An email has been sent with instructions to reset your password.', 'success')
-        #else:
-        #    flash('Email not found.', 'error')
-        #return redirect(url_for('auth.forgot_password'))  # Redirect after POST
-
-    #return render_template('forgot_password.html')
+'''
+@auth.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        if email in database:
+            send_reset_email(email)
+            flash('An email has been sent with instructions to reset your password.', 'success')
+        else:
+            flash('Email not found.', 'error')
+        return redirect(url_for('auth.forgot_password'))  # Redirect after POST
+    return render_template('forgot_password.html')
+'''

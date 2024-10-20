@@ -3,13 +3,17 @@ from flask import Blueprint,render_template,request,redirect,url_for,flash,curre
 from flask_login import current_user
 from .models import db,Patient, Patient_history
 from werkzeug.utils import secure_filename
-import tensorflow as tf
+#import tensorflow as tf
 from tensorflow.keras.utils import load_img, img_to_array
-from tensorflow.keras.models import load_model
-
+import pickle
 
 views= Blueprint('views',__name__)
-model = load_model(r'D:\OneDrive\Documents\GitHub\DR_Glucoma_AMD\best_model_transfer.h5')
+model_path = r'ML_portion\best_model.pkl'
+if os.path.exists(model_path):
+    with open(model_path, 'rb') as file:
+        model = pickle.load(file)
+else:
+    print("Model file not found.")
 @views.route('/')
 def home():
     diseases = [
@@ -79,7 +83,7 @@ def project_dashboard():
             # Get the patient's history after adding
             history = Patient_history.query.filter_by(patient_id=new_patient.id).all()            
             flash('Patient data submitted successfully', 'success')
-            return redirect(url_for('views.project_dashboard'))
+            return redirect(url_for('views.patient_history', patient_id=new_patient.id))
         else:
             flash('Invalid file type. Only images are allowed.', 'error')
             return redirect(url_for('views.project_dashboard'))
@@ -90,4 +94,4 @@ def project_dashboard():
 def patient_history(patient_id):
     patient = Patient.query.get_or_404(patient_id)
     history = Patient_history.query.filter_by(patient_id=patient_id).all()
-    return render_template('patient_history_and_results.html', patient=patient, history=history)
+    return render_template('patient_history_and_result.html', patient=patient, history=history)
