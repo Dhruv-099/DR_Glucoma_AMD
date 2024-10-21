@@ -28,7 +28,7 @@
 
         <div class="form-group">
             <label for="doctor_id">Doctor ID:</label>
-            <input type="number" class="form-control" name="doctor_id" id="doctor_id" required>
+            <input type="number" class="form-control" name="doctor_id" id="doctor_id" value="{{ current_user.id }}" readonly  required>
         </div>
 
         <div class="form-group">
