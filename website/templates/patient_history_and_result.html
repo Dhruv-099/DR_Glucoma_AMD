@@ -27,7 +27,7 @@
                 <td>{{ record.description }}</td>
                 <td>
                     {% if record.image %}
-                    <img src="{{ url_for('static', filename='Patient_uploads/' ~ record.image) }}" alt="Patient Image" width="100">
+                    <img src="{{ url_for('static', filename='Patient_uploads/' + patient.photo) }}" alt="Patient Photo" width="200" height="200">
                     {% endif %}
                 </td>
             </tr>
@@ -42,7 +42,7 @@
         <li>Name: {{ patient.name }}</li>
         <li>Age: {{ patient.age }}</li>
         <li>Gender: {{ patient.gender }}</li>
-        <li>Image: <img src="{{ image_url }}" alt="Uploaded Image" class="img-thumbnail" width="200"></li>
+        <li>Image: <img src="{{ url_for('static', filename='Patient_uploads/' + patient.photo) }}" alt="Patient Photo" width="200" height="200"></li>
     </ul>
 
     <a href="{{ url_for('views.project_dashboard') }}" class="btn btn-primary">Go back</a>

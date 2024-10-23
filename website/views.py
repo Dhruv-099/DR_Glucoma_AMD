@@ -1,18 +1,20 @@
 import os
-from flask import Blueprint,render_template,request,redirect,url_for,flash,current_app
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from flask_login import current_user
-from .models import db,Patient, Patient_history
+from .models import db, Patient, Patient_history
 from werkzeug.utils import secure_filename
-#import tensorflow as tf
 from tensorflow.keras.utils import load_img, img_to_array
 import pickle
 
-views= Blueprint('views',__name__)
-model_path = r'ML_portion\best_model.pkl'
+views = Blueprint('views', __name__)
+# Corrected model path (using forward slashes for better cross-platform compatibility)
+model_path = 'ML_portion/best_model.pkl'
+# Load the model if it exists
 if os.path.exists(model_path):
     with open(model_path, 'rb') as file:
         model = pickle.load(file)
 else:
+    model = None
     print("Model file not found.")
 @views.route('/')
 def home():
@@ -30,9 +32,9 @@ def home():
             "description": "Diabetic Retinopathy is a complication of diabetes that affects the blood vessels of the retina, the light-sensitive tissue at the back of the eye. Over time, high blood sugar levels can damage these vessels, leading to vision problems, including blindness. Diabetic retinopathy progresses through stages, starting from mild non-proliferative changes to severe proliferative retinopathy. Managing blood sugar levels and early detection are key to preventing vision loss."
         }
     ]
-    return render_template('home.html',user=current_user,diseases=diseases)
+    return render_template('home.html', user=current_user, diseases=diseases)
 
-#UPLOAD_FOLDER = 'website/static/Patient_uploads'
+# Ensure only allowed file types can be uploaded
 allowed_extensions = {'raw', 'png', 'jpg', 'jpeg'}
 
 def allowed_fn(filename):
@@ -44,7 +46,6 @@ def preprocess_image(image_path):
     img_array = img_array / 255.0  
     img_array = img_array.reshape(1, 224, 224, 3)  
     return img_array
-
 
 @views.route('/project-dashboard', methods=['GET', 'POST'])
 def project_dashboard():
@@ -64,26 +65,32 @@ def project_dashboard():
             filename = secure_filename(file.filename)
             file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)  
             file.save(file_path)
-            img_array = preprocess_image(file_path)
-            prediction = model.predict(img_array)
-            disease_class = prediction.argmax()
-            class_names = ['Diabetic Retinopathy', 'Glaucoma', 'AMD']
 
-            prediction_result = class_names[disease_class]
-            flash(f'Prediction: {prediction_result}', 'success')
+            if model is not None:
+                img_array = preprocess_image(file_path)
+                prediction = model.predict(img_array)
+                disease_class = prediction.argmax()
+                class_names = ['Diabetic Retinopathy', 'Glaucoma', 'AMD']
+                prediction_result = class_names[disease_class]
+                flash(f'Prediction: {prediction_result}', 'success')
+            else:
+                prediction_result = "Model not available."
+                flash('Model not available for prediction', 'error')
+
+            # Save patient data
             new_patient = Patient(
                 name=name,
                 age=age,
                 gender=gender,
                 phone_number=phone_number,
-                doctor_id=doctor_id
+                doctor_id=doctor_id,
+                photo=filename
             )
             db.session.add(new_patient)
             db.session.commit()
-            # Get the patient's history after adding
-            history = Patient_history.query.filter_by(patient_id=new_patient.id).all()            
-            flash('Patient data submitted successfully', 'success')
-            return redirect(url_for('views.patient_history', patient_id=new_patient.id))
+
+            # Redirect to patient history with prediction result in query params
+            return redirect(url_for('views.patient_history', patient_id=new_patient.id, prediction_result=prediction_result))
         else:
             flash('Invalid file type. Only images are allowed.', 'error')
             return redirect(url_for('views.project_dashboard'))
@@ -94,4 +101,8 @@ def project_dashboard():
 def patient_history(patient_id):
     patient = Patient.query.get_or_404(patient_id)
     history = Patient_history.query.filter_by(patient_id=patient_id).all()
-    return render_template('patient_history_and_result.html', patient=patient, history=history)
+    
+    # Retrieve prediction_result from the query params
+    prediction_result = request.args.get('prediction_result')
+    
+    return render_template('patient_history_and_result.html', patient=patient, history=history, prediction_result=prediction_result)
