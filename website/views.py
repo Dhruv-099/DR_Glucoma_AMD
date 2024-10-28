@@ -70,7 +70,7 @@ def project_dashboard():
                 img_array = preprocess_image(file_path)
                 prediction = model.predict(img_array)
                 disease_class = prediction.argmax()
-                class_names = ['Diabetic Retinopathy', 'Glaucoma', 'AMD']
+                class_names = ['Diabetic Retinopathy', 'Glaucoma', 'AMD','Normal']
                 prediction_result = class_names[disease_class]
                 flash(f'Prediction: {prediction_result}', 'success')
             else:
