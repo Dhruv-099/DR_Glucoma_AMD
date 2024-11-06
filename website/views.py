@@ -8,7 +8,7 @@ import pickle
 
 views = Blueprint('views', __name__)
 # Corrected model path (using forward slashes for better cross-platform compatibility)
-model_path = 'ML_portion/best_model.pkl'
+model_path = '/ML_portion/best_model.pkl'
 # Load the model if it exists
 if os.path.exists(model_path):
     with open(model_path, 'rb') as file:
